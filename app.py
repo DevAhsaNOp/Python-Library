@@ -131,8 +131,9 @@ def password_change():
 def delete_user():
     if 'loggedin' in session:
         deleteUserId = request.args.get('userid')
+        print('deleteUserId', deleteUserId)
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        cursor.execute('DELETE FROM user WHERE userid = % s', (deleteUserId, ))
+        cursor.execute('DELETE FROM user WHERE id = % s', (deleteUserId, ))
         mysql.connection.commit()   
         return redirect(url_for('users'))
     return redirect(url_for('login'))
